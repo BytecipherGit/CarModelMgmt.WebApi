@@ -1,0 +1,19 @@
+﻿@model List<CarModelMgmt.Core.Entities.Menu>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Menu</title>
+</head>
+<body>
+    <div>
+       
+        <ul>
+            @foreach (var menu in Model)
+            {
+                <li><a href="@Url.Action(menu.Action, menu.Controller)">@menu.Title</a></li>
+            }
+        </ul>
+    </div>
+</body>
+</html>
