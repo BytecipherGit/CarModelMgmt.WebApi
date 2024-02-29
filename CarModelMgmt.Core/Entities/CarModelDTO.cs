@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -42,7 +43,11 @@ namespace CarModelMgmt.Core.Entities
        
         public bool Active { get; set; }
         public int SortOrder { get; set; }
-        public string ModelImage { get; set; }
+        [Required(ErrorMessage = "Please select at least one image.")]
+        //[MaxFileSize(5 * 1024 * 1024, ErrorMessage = "Maximum allowed file size is 5 MB.")]
+       // public List<IFormFile> ModelImage { get; set; }
+        public string ModelImageUrl { get; set; }
+        public IFormFile ModelImage { get; set; }
 
     }
 }

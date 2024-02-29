@@ -10,14 +10,57 @@ namespace CarModelMgmt.Infrastructure.Repositories
 {
     public class CarModelRepository : ICarModelRepository
     {
-        public Task<IEnumerable<CarModelDTO>> GetCarDetal(string modelname, string modelCode)
+        private readonly DapperHelper _dapperHelper;
+        public CarModelRepository(DapperHelper dapperHelper)
         {
-            throw new NotImplementedException();
+            _dapperHelper = dapperHelper;
+        }
+        public async Task<IEnumerable<CarModelDTO>> GetCarDetal(/*string modelname, string modelCode*/)
+        {
+            try
+            {
+               
+                return await _dapperHelper.QueryAsync<CarModelDTO>("GetAllCarDetails");
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<int> SaveCarDetal(CarModelDTO dto)
+        public async Task<int> SaveCarDetal(CarModelDTO dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new
+                {
+                    Brand = dto.Brand,
+                    Class = dto.Class,
+                    ModelName = dto.ModelName,
+                    ModelCode = dto.ModelCode,
+                    Description = dto.Description,
+                    Features = dto.Features,
+                    Price = dto.Price,
+                    DateOfManufacturing = dto.DateOfManufacturing,
+                    Active = dto.Active,
+                    SortOrder = dto.SortOrder,
+                    ModelImage = dto.ModelImageUrl,
+                   
+
+                };
+
+                object result = await _dapperHelper.ExecuteScalarAsync("InsertCarModel", parameters);
+                int id = result != null ? Convert.ToInt32(result) : 0;
+                return id;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public Task UpdateCarDetal(CarModelDTO dto)

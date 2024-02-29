@@ -28,6 +28,7 @@ builder.Services.AddScoped<DapperHelper>(_ => new DapperHelper(connectionString)
 // Register the specific repository and service for the Poll entity
 //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICarModelRepository, CarModelRepository>();
 
 
 builder.Services.Configure<SendGridSettings>(builder.Configuration.GetSection("SendGridSettings"));
@@ -50,6 +51,7 @@ builder.Services.AddScoped<PasswordGenerator>();
 // Register the PasswordHasher class in the DI container
 builder.Services.AddScoped<Hasher>();
 builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<ICarServices, CarServices>();
 // Configure AutoMapper
 
 

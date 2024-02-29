@@ -1,0 +1,124 @@
+﻿@model CarModelMgmt.Core.Entities.CarModelDTO;
+@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<style>
+    .custom-background {
+        background: #f5f5f5; /* Light background color */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        padding: 20px; /* Adjust padding for content */
+        border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+    }
+</style>
+
+<form method="post" enctype="multipart/form-data">
+    <div class=".custom-background">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h3 class="text-primary">Create Car Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Left Column -->
+                <div class="mb-3">
+                    <label asp-for="Brand">Brand</label>
+                    <select asp-for="Brand" class="form-control">
+                        <option value="Audi">Audi</option>
+                        <option value="Jaguar">Jaguar</option>
+                        <option value="LandRover">Land Rover</option>
+                        <option value="Renault">Renault</option>
+                    </select>
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Class">Class</label>
+                    <select asp-for="Class" class="form-control">
+                        <option value="A-Class">A-Class</option>
+                        <option value="B-Class">B-Class</option>
+                        <option value="C-Class">C-Class</option>
+                    </select>
+                    <span asp-validation-for="Class" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>ModelName</label>
+                    <input type="text" asp-for="ModelName" placeholder="Enter Your Class" class="form-control" />
+                    <span asp-validation-for="ModelName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>ModelCode</label>
+                    <input type="text" asp-for="ModelCode" placeholder="Enter Your RollNo" class="form-control" />
+                    <span asp-validation-for="ModelCode" class="text-danger"></span>
+                </div>
+                 <div class="mb-3">
+                    <label>Price</label>
+                    <input type="text" asp-for="Price" placeholder="Enter Your CourseId" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>DateOfManufacturing</label>
+                    <div class="input-group date" id="datetimepicker">
+                        <input type="text" asp-for="DateOfManufacturing" placeholder="Select Date and Time" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="DateOfManufacturing" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Active</label>
+                    <input type="checkbox" asp-for="Active" class="form-check-input" />
+                    <span asp-validation-for="Active" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>SortOrder</label>
+                    <input type="text" asp-for="SortOrder" placeholder="Enter Your CourseId" class="form-control" />
+                    <span asp-validation-for="SortOrder" class="text-danger"></span>
+                </div>
+                    <div class="mb-3">
+                        <label>ModelImage</label>
+                        <input type="file" asp-for="ModelImage" class="form-control" accept="image/*" multiple data-max-size="5MB" />
+                        <span asp-validation-for="ModelImage" class="text-danger"></span>
+                    </div>
+                <!-- Add more fields for the left column as needed -->
+            </div>
+            <div class="col-md-6">
+                <!-- Right Column -->
+                <div class="mb-3">
+                    <label>Description</label>
+                    <textarea asp-for="Description" id="editor" placeholder="Enter Your Description" class="form-control" required></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Features</label>
+                    <textarea asp-for="Features" id="editor1" placeholder="Enter Your CourseId" class="form-control" required></textarea>
+                    <span asp-validation-for="Features" class="text-danger"></span>
+                </div>
+               
+                <!-- Add more fields for the right column as needed -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button class="btn btn-primary form-control" type="submit">Save</button>
+            </div>
+            <div class="col-6">
+                <a  asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary border form-control">Back to the list</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+   
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('editor');
+            CKEDITOR.replace('editor1');
+        });
+    </script>
+}
