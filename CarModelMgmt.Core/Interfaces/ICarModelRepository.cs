@@ -16,5 +16,7 @@ namespace CarModelMgmt.Core.Interfaces
         //Task<IEnumerable<CoverageAreaDTO>> GetEventCoverageAreas(int userId, int eventId);
         //Task<IEnumerable<EventParticipateCriteriaRulesType>> GetEventParticipationRules(int userId, int eventId);
         //Task<GetEventDetailsDTO> GetEventDetails(int userId, int eventId);
+        Task<IEnumerable<FixedCommissionBrandWise>> GetCommissionDetal(/*string modelname, string modelCode*/);
+        Task<IEnumerable<ClassWiseCommissionDTO>> GetCommissionDetalClassWise(string Class);
     }
 }

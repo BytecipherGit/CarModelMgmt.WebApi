@@ -11,5 +11,7 @@ namespace CarModelMgmt.Services.Interfaces
     {
         Task<IEnumerable<CarModelDTO>> GetCarDetal(/*string modelname, string modelCode*/);
         Task<int> SaveCarDetal(CarModelDTO dto);
+        Task<IEnumerable<FixedCommissionBrandWise>> GetCommissionDetal(/*string modelname, string modelCode*/);
+        Task<IEnumerable<ClassWiseCommissionDTO>> GetCommissionDetalClassWise(string Class);
     }
 }

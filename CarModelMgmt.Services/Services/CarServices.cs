@@ -28,6 +28,30 @@ namespace CarModelMgmt.Services.Services
             }
         }
 
+        public async Task<IEnumerable<FixedCommissionBrandWise>> GetCommissionDetal()
+        {
+            try
+            {
+                return await _carRepository.GetCommissionDetal();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<ClassWiseCommissionDTO>> GetCommissionDetalClassWise(string Class)
+        {
+            try
+            {
+                return await _carRepository.GetCommissionDetalClassWise(Class);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<int> SaveCarDetal(CarModelDTO dto)
         {
             try

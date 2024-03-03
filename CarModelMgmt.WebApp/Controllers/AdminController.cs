@@ -92,5 +92,29 @@ namespace CarModelMgmt.WebApp.Controllers
                 return View();
             }
         }
+
+        public async Task<IActionResult> CommissionDetail()
+        {
+            //ViewData["searchTerm"] = searchTerm;
+            var cardtl = await _carService.GetCommissionDetal();
+            return View(cardtl);
+        }
+        [HttpGet]
+        public IActionResult CommissionDetailClassWise()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CommissionDetailClassWise(string selectedClass)
+        {
+            // Your logic to retrieve commission details based on the selected class
+            var commissionDetails = await _carService.GetCommissionDetalClassWise(selectedClass);
+
+            // Pass the commission details to the view
+            return View(commissionDetails);
+        }
+
+       
     }
 }

@@ -30,6 +30,40 @@ namespace CarModelMgmt.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<FixedCommissionBrandWise>> GetCommissionDetal()
+        {
+            try
+            {
+
+                return await _dapperHelper.QueryAsync<FixedCommissionBrandWise>("CalculateTotalCommission");
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<ClassWiseCommissionDTO>> GetCommissionDetalClassWise(string Class)
+        {
+            try
+            {
+                var parm = new
+                {
+                    InputClass=Class
+                };
+
+                return await _dapperHelper.QueryAsync<ClassWiseCommissionDTO>("CalculateClassWiseCommission", parm);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<int> SaveCarDetal(CarModelDTO dto)
         {
             try

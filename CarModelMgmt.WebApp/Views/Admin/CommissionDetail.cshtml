@@ -1,0 +1,79 @@
+﻿@model List<CarModelMgmt.Core.Entities.FixedCommissionBrandWise>;
+@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<div class="text-end">
+    <a class="btn btn-primary" asp-controller="Admin" asp-action="Dashboard"><i class="bi bi-house-check-fill"></i>Back to home</a>
+</div>
+<div class="container">
+    <div class="row p-2 mt-3">
+
+        <div class="col-6">
+            <h2>Fixed Commission Report</h2>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="CommissionDetailClassWise"><i class="bi bi-house-check-fill"></i>Class wise Commission Report</a>
+        </div>
+       
+        <table class="table table-bordered table-striped mt-10">
+            <thead>
+                <tr class="bg-primary text-white">
+                    <td>SalesManName</td>
+                    <td>Brand</td>
+                    <td>total_cars_sold</td>
+                    <td>FixedCommission</td>
+                    <td>Commission</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var salesmanGroup in Model.GroupBy(m => m.SalesManName))
+                {
+                    var totalCommission = salesmanGroup.Sum(s => s.TOTALCOMMISSION);
+                    var firstRow = true;
+
+                    foreach (var std in salesmanGroup)
+                    {
+                        <tr>
+                            @if (firstRow)
+                            {
+                                <td rowspan="@salesmanGroup.Count()">@std.SalesManName</td>
+                                firstRow = false;
+                            }
+                            <td>@std.Brand</td>
+                            <td>@std.total_cars_sold</td>
+                            <td>@std.FixedCommission<i class="bi bi-currency-dollar"></i></td>
+                            <td>@std.TOTALCOMMISSION<i class="bi bi-currency-dollar"></i></td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td colspan="2" class="text-end"><strong>Total Commission:</strong></td>
+                        <td><strong>@salesmanGroup.Sum(s => s.total_cars_sold)</strong></td>
+                        <td></td>
+                        <td><strong>@totalCommission<i class="bi bi-currency-dollar"></i></strong></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#searchTerm').on('input', function () {
+            var searchTerm = $(this).val().toLowerCase();
+
+            // Hide all rows
+            $('tbody tr').hide();
+
+            // Show only rows where SalesManName or Brand contains the search term
+            $('tbody tr').filter(function () {
+                return $(this).find('td:eq(0)').text().toLowerCase().indexOf(searchTerm) >= 0 ||   // SalesManName
+                    $(this).find('td:eq(1)').text().toLowerCase().indexOf(searchTerm) >= 0;    // Brand
+            }).show();
+        });
+    });
+</script>

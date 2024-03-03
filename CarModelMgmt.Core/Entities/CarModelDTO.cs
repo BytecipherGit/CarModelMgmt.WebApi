@@ -24,7 +24,7 @@ namespace CarModelMgmt.Core.Entities
         [Required(ErrorMessage = "Model name is required.")]
         public string ModelName { get; set; }
         [Required(ErrorMessage = "ModelCode is required.")]
-        [MinLength(10, ErrorMessage = "ModelCode must be at least 10 characters long.")]
+        [MinLength(10, ErrorMessage = "ModelCode must be at least 5 characters long.")]
 
         public string ModelCode { get; set; }
 
